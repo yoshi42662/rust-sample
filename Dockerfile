@@ -1,8 +1,13 @@
 FROM rust:1
 
+WORKDIR /var/www
+COPY . /var/www
+
 # Install Cargo.
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-COPY . /var/www
+# Install Crates.
+RUN cargo build
 
-WORKDIR /var/www
+RUN cargo install cargo-watch
+
